@@ -7,7 +7,7 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
-body {
+body#intro {
   background-color: #5cbbff;
 }
 
@@ -132,4 +132,190 @@ div#name_div::before {
 
 #central_section p a {
   color: #2c52ff;
+}
+
+#burger_container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 26px;
+  transition: 0.5s;
+  z-index: 3;
+}
+
+#burger_container.active {
+  left: 260px;
+}
+
+#burger {
+  width: 40px;
+  height: 26px;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#burger span {
+  display: block;
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background: #5cbbff;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+#burger span:nth-child(1) {
+  top: 0px;
+}
+
+#burger span:nth-child(2),
+#burger span:nth-child(3) {
+  top: 11px;
+}
+
+#burger span:nth-child(4) {
+  top: 21px;
+}
+
+#burger.open span:nth-child(1) {
+  top: 11px;
+  width: 0%;
+  left: 50%;
+}
+
+#burger.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#burger.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#burger.open span:nth-child(4) {
+  top: 11px;
+  width: 0%;
+  left: 50%;
+}
+
+aside {
+  position: fixed;
+  left: -250px;
+  width: 250px;
+  top: 0;
+  background-color: #5cbbff;
+  transition: 0.5s;
+  transform: translateX(0);
+  height: 100vh;
+  z-index: 2;
+}
+
+aside.active {
+  transform: translateX(250px);
+  height: 100vh;
+  width: 250px;
+  top: 0;
+  background-color: #5cbbff;
+}
+
+aside button {
+  color: #ff7a7a;
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 2px solid #ff7a7a;
+  padding: 5px 10px;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 20px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+div#profile_picture {
+  width: 100%;
+  margin: 20px 0 12px;
+}
+
+div#profile_picture span {
+  display: block;
+  margin: 0 auto;
+  height: 75px;
+  width: 75px;
+  background-color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 75px;
+  border-radius: 50%;
+  color: #9a5151;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+p#name {
+  text-align: center;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+nav {
+  margin: 25px 0;
+}
+
+nav ul {
+  max-height: 250px;
+  list-style-type: none;
+  overflow-y: scroll;
+}
+
+nav ul li a {
+  border-top: 1px solid #6d6d6d15;
+  text-decoration: none;
+  color: white;
+  display: block;
+  line-height: 40px;
+  padding: 0 15px;
+}
+
+nav ul li:nth-last-of-type(1) a {
+  border-top: 1px solid #6d6d6d15;
+  border-bottom: 1px solid #6d6d6d15;
+}
+
+header {
+  position: fixed;
+  top: 10;
+  width: 100%;
+  text-align: center;
+  color: #5cbbff;
+  /* text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
+  font-size: 38px;
 }
