@@ -13,12 +13,14 @@
   <p id="name">Norbert</p>
   <nav>
     <ul>
-      <li><a href="">Mój profil</a></li>
+      <li><a href="/Wordy/teacher/">Panel główny</a></li>
+      <li><a href="/Wordy/profile">Mój profil</a></li>
+
     </ul>
   </nav>
-  <button>
+  <a href='/Wordy/login.html' class="logout">
     <i class="fas fa-sign-out-alt"></i>
     Wyloguj
-  </button>
+  </a>
 </aside>
 <script src="/Wordy/js/burger_menu_scripts.js"></script>

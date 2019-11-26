@@ -42,6 +42,12 @@ h2 {
   margin-bottom: 10px;
 }
 
+h3 {
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+
 #central_section {
   width: 80%;
   position: absolute;
@@ -70,7 +76,7 @@ h2 {
   background-color: #fff;
 }
 
-.box input {
+.box input,.box select {
   position: relative;
   padding: 5px 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -112,6 +118,28 @@ h2 {
   transition: 0.2s;
 }
 
+#intro .input_container::before {
+  top: 49%;
+  left: 9px;
+  color: #5cbbff;
+  font-size: 16px;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition: 0.2s;
+}
+
+#intro .input_container.active::before {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  left: 7px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .input_container.active::before {
   display: block;
   position: absolute;
@@ -140,6 +168,22 @@ div#name_div::before {
 
 div#title_div::before {
   content: 'Tytuł';
+}
+
+div#title2_div::before {
+  content: 'Tytuł';
+}
+
+div#lang_div::before {
+  content: 'Język';
+}
+
+div#name_div::before {
+  content: 'Nowa nazwa';
+}
+
+div#class_div::before {
+  content: 'Wybór klas';
 }
 
 #central_section input[type='submit'] {
@@ -197,7 +241,7 @@ div#title_div::before {
   position: absolute;
   height: 5px;
   width: 100%;
-  background: #5cbbff;
+  background: #ffbe3b;
   border-radius: 9px;
   opacity: 1;
   left: 0;
@@ -252,7 +296,7 @@ div#title_div::before {
 
 aside {
   position: fixed;
-  left: -250px;
+  left: -254px;
   width: 250px;
   top: 0;
   background-color: #5cbbff;
@@ -260,6 +304,7 @@ aside {
   transform: translateX(0);
   height: 100vh;
   z-index: 2;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 aside.active {
@@ -270,7 +315,7 @@ aside.active {
   background-color: #5cbbff;
 }
 
-aside button {
+aside a.logout {
   color: #ff7a7a;
   display: block;
   position: absolute;
@@ -285,6 +330,7 @@ aside button {
   font-weight: bold;
   font-size: 20px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
 }
 
 div#profile_picture {
@@ -362,14 +408,22 @@ header h1{
 
 .box>section {
   opacity: 0;
-  overflow: hidden;
   max-height: 0;
   transition: .5s;
+  overflow-y: scroll;
+  /* overflow-x: hidden; */
+  color:white;
 }
 
 .box>section.active {
   max-height: 300px;
   opacity: 1;
+}
+
+.box>section p.filter {
+  font-weight: bold;
+  /* margin-left: 7px; */
+  margin-bottom: 10px;
 }
 
 .box .excol-arrow {
@@ -389,14 +443,46 @@ header h1{
   transition: 0.5s;
 }
 
-.box ul {
+.box table {
   list-style-type: none;
+  border-collapse: collapse;
+  width:100%;
+  max-width: 100%;
 }
 
-.box ul li {
+.box th {
+  background-color: #0095ff
+}
+
+.box th i, .box p.filter i {
+  margin-left: 5px;
+  font-size: .7rem;
+}
+
+.box p.filter i.active {
+  transform: rotate(180deg);
+  transition: .5s;
+}
+
+.box th.sorted {
+  background-color: #005c9e
+}
+
+.box td, .box th {
+  border: 1px solid #0095ff;
   color: white;
-  margin: 2px 0;
-  padding: 10px 0;
+  padding: 5px;
+}
+
+.box td.language {
+  color: #ffbe3b;
+  margin-right: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.box th.language {
+  text-align: center;
 }
 
 ::-webkit-scrollbar {
@@ -404,5 +490,108 @@ header h1{
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #005c9e
+  background: #0095ff
+}
+
+form.filter {
+  display: none;
+  margin-bottom: 20px;
+}
+
+form.filter.active {
+  display: block;
+}
+
+form.filter input, form.filter select, form.filter input::before, form.filter select::before{
+  font-size: 0.8rem;
+  padding: 3px 6px;
+}
+
+div.filter_btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+form.filter button {
+  position: relative;
+  padding: 5px 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  margin: 5px 0 10px;
+  border-radius: 3px;
+  height: 35px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #5cbbff;
+}
+
+form.filter button.clear_filter {
+  color: #ff5959
+}
+
+.input_container::before {
+  -moz-transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
+  transform: translateY(-40%);
+  top: 55%
+}
+
+#add-flashcards button {
+  position: relative;
+  padding: 4px 6px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  margin: 5px 0 10px;
+  border-radius: 3px;
+  height: 35px;
+  font-size:14px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #5cbbff;
+  cursor: pointer;
+}
+
+#add-flashcards h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+#add-flashcards h3 span {
+  flex: 1 0 auto;
+}
+
+#add-flashcards h3 i {
+  flex: 0 1 auto;
+  color: #ff5959;
+}
+
+#add-flashcards .flashcard-input input{
+  margin: 5px 0;
+}
+
+#add-flashcards .flashcard-input:nth-of-type(n+2){
+  margin-top:10px;
+}
+
+#add-flashcards>section {
+  max-height: none
+}
+
+#profile-settings-box>section{
+  max-height: none;
+  opacity: 1;
+}
+
+select[multiple] {
+  margin-top: 5px;
+  /* overflow: scroll; */
+  height: auto;
+}
+
+#select-classes select {
+  height: auto;
+  max-height: none;
 }

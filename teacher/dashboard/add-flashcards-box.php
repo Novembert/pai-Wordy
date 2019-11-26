@@ -1,7 +1,7 @@
-<div id="add-flashcards" class="box">
+<div id="add-flashcards-box" class="box">
   <h2>Dodawanie fiszek</h2>
   <section>
-    <form method="post" action="./teacher/flashcards/add-flashcards.php">
+    <form method="post" action="./flashcards/add-flashcards.php">
       <div id="title_div" class="input_container">
         <input type="text" name="title" id="title_input">
       </div>
@@ -13,7 +13,7 @@
     <i class="fas fa-chevron-down"></i>
   </div>
   <script type="text/javascript">
-    const section2 = document.querySelector('#add-flashcards section');
+    const section2 = document.querySelector('#add-flashcards-box section');
     const arr2 = document.querySelector('#excol-arrow-2');
     arr2.addEventListener('click',()=>{
       arr2.classList.toggle('active')
@@ -23,6 +23,14 @@
     const titleDiv = document.getElementById('title_div');
     const titleInput = document.getElementById('title_input')
 
+    if (titleInput.value != null && titleInput.value.length != 0)
+    {
+      titleDiv.classList.add('active');
+    }
+    else {
+      titleDiv.classList.remove('active')
+    }
+
     titleInput.addEventListener('input',()=>{
       if (titleInput.value != null && titleInput.value.length != 0)
       {
@@ -31,6 +39,12 @@
       else {
         titleDiv.classList.remove('active')
       }
+    })
+
+    sessionStorage.setItem('flashcards_adding_title',titleInput.value)
+
+    titleInput.addEventListener('input',()=>{
+      sessionStorage.setItem('flashcards_adding_title',titleInput.value)
     })
 
 

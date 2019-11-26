@@ -1,4 +1,4 @@
 
-<?php require('./header.html ')?>
-<?php include('./teacher/dashboard/browse-flashcards-box.php') ?>
-<?php include('./teacher/dashboard/add-flashcards-box.php') ?>
+<?php require_once('../header.html ')?>
+<?php include('./dashboard/add-flashcards-box.php') ?>
+<?php include('./dashboard/browse-flashcards-box.php') ?>

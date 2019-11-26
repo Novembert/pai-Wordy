@@ -6,11 +6,3 @@ burgerContainer.addEventListener('click', () => {
   burgerContainer.classList.toggle('active');
   aside.classList.toggle('active');
 });
-
-document.addEventListener('keydown', e => {
-  if (e.keyCode == 32) {
-    burger.classList.toggle('open');
-    burgerContainer.classList.toggle('active');
-    aside.classList.toggle('active');
-  }
-});
