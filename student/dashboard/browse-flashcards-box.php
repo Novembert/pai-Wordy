@@ -1,5 +1,5 @@
 <div id="browse-flashcards" class="box">
-  <h2>Przeglądanie fiszek</h2>
+  <h2>Twoje zestawy</h2>
   <section class="active">
     <p class="filter">Filtruj<i class="fas fa-chevron-down"></i></p>
     <form id="filter1" class="filter" method="post">

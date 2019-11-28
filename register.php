@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wordy | Logowanie</title>
+    <title>Wordy | Rejestracja</title>
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext"
       rel="stylesheet"
@@ -12,18 +12,24 @@
   </head>
   <body id="intro">
     <section id="central_section">
-      <h1>Logowanie</h1>
-      <form method="POST">
+      <h1>Register</h1>
+      <form method="POST" action="/Wordy/add-name.php">
         <div id="email_div" class="input_container">
           <input type="email" name="email" id="email_input" />
         </div>
+
+        <div id="email_conf_div" class="input_container">
+          <input type="email" name="email" id="email_conf_input" />
+        </div>
+
         <div id="password_div" class="input_container">
           <input type="password" name="password" id="password_input" />
         </div>
+
         <input type="submit" value="Prześlij" />
       </form>
-      <p>Nie masz konta? <a href="register.html">Zarejestruj się!</a></p>
+      <p>Masz już konto? <a href="login.php">Zaloguj się!</a></p>
     </section>
-    <script src="js/login_form_animations.js" charset="utf-8"></script>
+    <script src="js/register_form_animations.js" charset="utf-8"></script>
   </body>
 </html>

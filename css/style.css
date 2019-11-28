@@ -102,6 +102,9 @@ h3 {
 
 .input_container {
   position: relative;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto
 }
 
 .input_container::before {
@@ -404,6 +407,9 @@ header h1{
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  max-width: 450px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .box>section {
@@ -565,7 +571,7 @@ form.filter button.clear_filter {
 
 #add-flashcards h3 i {
   flex: 0 1 auto;
-  color: #ff5959;
+  color: #ff8787;
 }
 
 #add-flashcards .flashcard-input input{
@@ -594,4 +600,178 @@ select[multiple] {
 #select-classes select {
   height: auto;
   max-height: none;
+}
+
+#flashcards-set>section {
+  max-height: none;
+}
+
+#flashcards-set>section>div {
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid white;
+  border-radius: 1px;
+}
+
+#flashcards-set>section p:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px 1px;
+}
+
+#flashcards-set>section p:first-of-type i {
+  color: #ff8787;
+}
+
+#flashcards-set>section p:last-of-type {
+  display: flex;
+  justify-content: space-around;
+}
+
+#flashcards-set>section p:last-of-type i {
+  color: #ffbe3b;
+}
+
+#browse-flashcards a{
+  color: white;
+  text-decoration: none;
+}
+
+i.fas.fa-trash {
+  color: #ff8787;
+  transition: .2s;
+  z-index: 2;
+}
+
+i.fas.fa-trash:hover {
+  text-shadow: 0px 0px 5px #FF8787
+}
+
+#flashcards-set h2 {
+  position: relative;
+}
+
+#flashcards-set h2 a {
+  color: white;
+  text-decoration: underline;
+}
+
+#flashcards-set h2 i {
+  position: relative;
+  top: 2px;
+}
+
+#show {
+  margin-top: 50px;
+  color: white;
+  height: 200px;
+  font-size: 38px;
+  position: relative;
+  cursor: pointer;
+
+}
+
+#container {
+  margin-left: auto;
+  margin-right: auto;
+
+  max-width: 450px;
+}
+
+#show span {
+  transition: .1s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
+}
+
+#show span.hide {
+  opacity: 0
+}
+
+#arrows-container {
+  display: flex;
+  justify-content: space-between;
+  margin:  0 20px;
+  color: #ffbe3b;
+  font-size: 26px;
+  padding: 0 5px;
+}
+
+#arrows-container .fa-arrow-left {
+  align-self: flex-end;
+  padding-right: 10px;
+}
+
+#arrows-container .fa-arrow-right {
+  align-self: flex-start;
+  padding-left: 10px;
+}
+
+
+.d-none {
+  opacity: 1;
+}
+
+.d-flex {
+  padding:0 20px;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#pages {
+  text-align: center;
+  font-size: 22px;
+  color: #ffbe3b;
+}
+
+@media (min-width: 768px) {
+  aside {
+    transform: translateX(250px);
+  }
+
+  body {
+    margin-left: 250px;
+  }
+
+  #burger_container {
+    display: none;
+  }
+
+  .box>section {
+    max-height: none;
+    opacity: 1
+  }
+
+  .box .excol-arrow {
+    display: none;
+  }
+
+  .box>section.active {
+    max-height: none;
+  }
+
+}
+
+@media (min-width: 950px) {
+  .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .d-flex .box {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

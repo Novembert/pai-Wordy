@@ -19,9 +19,10 @@
       <h1>Lista fiszek</h1>
     </header>
     <form class="" action="../../teacher" method="post">
-    <div id="add-flashcards" class="box">
-      <section class="active">
-
+    <div class="d-flex">
+      <div id="add-flashcards" class="box">
+        <h2></h2>
+        <section class="active">
           <section class="flashcards">
             <section class="flashcard-input">
               <h3><span>Definicja 1</span><i class="fas fa-trash"></i></h3>
@@ -30,26 +31,25 @@
             </section>
           </section>
           <button>Nowa +</button>
-
-
-      </section>
-    </div>
-
-    <div id="select-classes" class="box">
-      <h2>Wybierz klasy</h2>
-      <div id="class2_div" class="input_container">
-        <select name="class2" id="class2_input" multiple>
-          <option value="3a">3A</option>
-          <option value="4a">4A</option>
-          <option value="2c">2C</option>
-          <option value="3d">3D</option>
-          <option value="3a">3A</option>
-          <option value="4a">4A</option>
-          <option value="2c">2C</option>
-          <option value="3d">3D</option>
-        </select>
+        </section>
       </div>
-      <input type="submit"value="Stwórz">
+
+      <div id="select-classes" class="box">
+        <h2>Wybierz klasy</h2>
+        <div id="class2_div" class="input_container">
+          <select name="class2" id="class2_input" multiple>
+            <option value="3a">3A</option>
+            <option value="4a">4A</option>
+            <option value="2c">2C</option>
+            <option value="3d">3D</option>
+            <option value="3a">3A</option>
+            <option value="4a">4A</option>
+            <option value="2c">2C</option>
+            <option value="3d">3D</option>
+          </select>
+        </div>
+        <input type="submit"value="Stwórz">
+      </div>
     </div>
     </form>
   </body>
@@ -60,7 +60,7 @@
   let title = sessionStorage.flashcards_adding_title
 
   const newBtn = document.querySelector('button');
-  const flashcards_list = document.querySelector('#add-flashcards form .flashcards');
+  const flashcards_list = document.querySelector('form .flashcards');
 
   let i = 2;
 
