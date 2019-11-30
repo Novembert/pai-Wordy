@@ -52,6 +52,9 @@
           </div>
           <input type="submit" name="" value="Wyślij">
         </form>
+        <form class="acc_delete" action="" method="post">
+          <input type="submit" name="delete_acc" value="Usuń konto">
+        </form>
       </section>
     </div>
   </body>

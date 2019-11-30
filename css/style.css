@@ -92,12 +92,16 @@ h3 {
 
 .box input[type='submit'] {
   display: block;
-
+  cursor:pointer;
   width: 100px;
   margin: 5px auto 10px;
   background-color: #fff;
   color: #5cbbff;
   font-weight: bold;
+}
+
+button {
+  cursor:pointer;
 }
 
 .input_container {
@@ -732,6 +736,21 @@ i.fas.fa-trash:hover {
   text-align: center;
   font-size: 22px;
   color: #ffbe3b;
+}
+
+form.acc_delete {
+  margin-top: 30px;
+}
+
+form.acc_delete input[type='submit'] {
+  color: #ff5959;
+  transition: .1s;
+  cursor:pointer;
+}
+
+form.acc_delete input[type='submit']:hover {
+  color: white;
+  background-color: #ff5959;
 }
 
 @media (min-width: 768px) {
