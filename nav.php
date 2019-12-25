@@ -19,7 +19,7 @@
 
     </ul>
   </nav>
-  <a href='/Wordy/login.php' class="logout">
+  <a href='/Wordy/login.php?logout=true' class="logout">
     <i class="fas fa-sign-out-alt"></i>
     Wyloguj
   </a>

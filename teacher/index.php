@@ -1,3 +1,28 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['user'])){
+    header('Location: ../login.php');
+  }else {
+    $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
+    $data = explode('!//#',$data);
+
+    if($data[2] == 1){
+      if($data[1] != 2) {
+        if($data[1] == 1) {
+          header('Location: ../student');
+        }else {
+          // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+        }
+      }
+    }else if($data[2] == 2){
+      // wywołaj jak konto nieaktywne
+    }else if($data[2] == 3){
+      // wywolaj jak konto usuniete
+    }else {
+      // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
   <head>
