@@ -9,19 +9,13 @@
     $data = explode('!//#',$data);
 
     if($data[2] == 1){
-        if($data[1] == 1) {
-          header('Location: student');
-        }else if($data[1] == 2) {
-          header('Location: teacher');
-        }else {
-          // nieobsluzony przypadek (jeszcze nwm czy zostawie)
-        }
-    }else if($data[2] == 2){
-      // wywołaj jak konto nieaktywne
-    }else if($data[2] == 3){
-      // wywolaj jak konto usuniete
-    }else {
-      // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+      if($data[1] == 1) {
+        header('Location: student');
+      }else if($data[1] == 2) {
+        header('Location: teacher');
+      }else {
+        // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+      }
     }
   }
 ?>
@@ -43,33 +37,101 @@
       mysqli_set_charset($connect, "utf8");
 
       if(isset($_POST['btn1'])){
-        $query = $connect->prepare("SELECT id_uzytkownika,id_rolu,id_statusu,id_profilu FROM uzytkownicy WHERE email = ? AND haslo = ?");
-        $query->bind_param('ss',$_POST['email'],$_POST['password']);
-        $query->execute();
-        $result = $query->get_result();
-        if(!$result) {
-          die('Invalid query: ' . mysqli_error($connect));
-        } else if(mysqli_num_rows($result) > 0) {
-          $row = mysqli_fetch_assoc($result);
-          $row2 = $row;
-          $row = implode('!//#',$row);
-          $row = openssl_encrypt($row,'rc4-hmac-md5','ptaki_lataja_kluczem');
-          $_SESSION['user'] = $row;
-          if($row2['id_statusu'] == 1){
-            if($row2['id_rolu'] == 1) {
-              header('Location: student');
-            }else if($row2['id_rolu'] == 2){
-              header('Location: teacher');
-            }
-          }else if($row2['id_statusu'] == 2){
-            // wywołaj jak konto nieaktywne
-          }else if($row2['id_statusu'] == 3){
-            // wywolaj jak konto usuniete
-          }else {
-            // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+        if(empty($_POST['email']) || empty($_POST['password'])){
+          ?>
+            <script type="text/javascript">
+              let alertBox = document.createElement('div');
+              alertBox.classList.add('alerts-box');
+              document.body.appendChild(alertBox);
+
+            </script>
+          <?php
+          if(empty($_POST['email'])) {
+            ?>
+              <!-- wypelnij email -->
+              <script type="text/javascript">
+                let alert = document.createElement('div');
+                alert.classList.add('empty_alert');
+                alert.textContent = "Proszę wypełnić pole 'Email'";
+                alertBox.appendChild(alert);
+                window.setInterval(()=>{alert.style.display="none"},2500)
+              </script>
+            <?php
+          }
+          if (empty($_POST['password'])) {
+            ?>
+              <!-- wypelnij haslo -->
+              <script type="text/javascript">
+                let alert3 = document.createElement('div');
+                alert3.classList.add('empty_alert');
+                alert3.textContent = "Proszę wypełnić pole 'Hasło'";
+                alertBox.appendChild(alert3);
+                window.setInterval(()=>{alert3.style.display="none"},2500)
+              </script>
+            <?php
           }
         }else {
-          // wywołaj jak nie bedzie dobrego loginu
+          $query = $connect->prepare("SELECT id_uzytkownika,id_rolu,id_statusu,id_profilu FROM uzytkownicy WHERE email = ? AND haslo = ?");
+          $query->bind_param('ss',$_POST['email'],$_POST['password']);
+          $query->execute();
+          $result = $query->get_result();
+          if(!$result) {
+            die('Invalid query: ' . mysqli_error($connect));
+          }else if(mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $row2 = $row;
+            $row = implode('!//#',$row);
+            $row = openssl_encrypt($row,'rc4-hmac-md5','ptaki_lataja_kluczem');
+            $_SESSION['user'] = $row;
+            if($row2['id_statusu'] == 1){
+              if($row2['id_rolu'] == 1) {
+                header('Location: student');
+              }else if($row2['id_rolu'] == 2){
+                header('Location: teacher');
+              }
+            }else if($row2['id_statusu'] == 2){
+              ?>
+                <script type="text/javascript">
+                  let alertBox = document.createElement('div');
+                  alertBox.classList.add('alerts-box');
+                  document.body.appendChild(alertBox);
+                  let alert5 = document.createElement('div');
+                  alert5.classList.add('yellow_alert');
+                  alert5.textContent = "Twoje konto jest nieaktywne!";
+                  alertBox.appendChild(alert5);
+                  window.setInterval(()=>{alert5.style.display="none"},2500)
+                </script>
+              <?php
+            }else if($row2['id_statusu'] == 3){
+              ?>
+                <script type="text/javascript">
+                  let alertBox = document.createElement('div');
+                  alertBox.classList.add('alerts-box');
+                  document.body.appendChild(alertBox);
+                  let alert6 = document.createElement('div');
+                  alert6.classList.add('yellow_alert');
+                  alert6.textContent = "To konto zostało usunięte!";
+                  alertBox.appendChild(alert6);
+                  window.setInterval(()=>{alert6.style.display="none"},2500)
+                </script>
+              <?php
+            }else {
+              // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+            }
+          }else if(mysqli_num_rows($result) == 0){
+            ?>
+              <script type="text/javascript">
+                let alertBox = document.createElement('div');
+                alertBox.classList.add('alerts-box');
+                document.body.appendChild(alertBox);
+                let alert7 = document.createElement('div');
+                alert7.classList.add('yellow_alert');
+                alert7.textContent = "Nieprawidłowe dane logowania!";
+                alertBox.appendChild(alert7);
+                window.setInterval(()=>{alert7.style.display="none"},2500)
+              </script>
+            <?php
+          }
         }
       }
       mysqli_close($connect);
