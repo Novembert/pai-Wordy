@@ -1,23 +1,5 @@
 <?php
-  session_start();
-  if(isset($_GET['logout']) && isset($_SESSION['user'])){
-    $_SESSION['user'] = null;
-  }else if(isset($_GET['logout'])) {
-    header('Location: login.php');
-  }else if(isset($_SESSION['user'])){
-    $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
-    $data = explode('!//#',$data);
-
-    if($data[2] == 1){
-      if($data[1] == 1) {
-        header('Location: student');
-      }else if($data[1] == 2) {
-        header('Location: teacher');
-      }else {
-        // nieobsluzony przypadek (jeszcze nwm czy zostawie)
-      }
-    }
-  }
+  require_once("./autologin.php")
 ?>
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
@@ -129,6 +111,7 @@
             }else {
               ?>
                 <script type="text/javascript">
+                  console.log('dupa')
                   let alertBox = document.createElement('div');
                   alertBox.classList.add('alerts-box');
                   document.body.appendChild(alertBox);
@@ -140,8 +123,6 @@
                 </script>
               <?php
             }
-
-
           }else if(mysqli_num_rows($result) == 0){
             ?>
               <script type="text/javascript">

@@ -1,19 +1,5 @@
 <?php
-  session_start();
-  if(isset($_SESSION['user'])){
-    $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
-    $data = explode('!//#',$data);
-
-    if($data[2] == 1){
-      if($data[1] == 1) {
-        header('Location: student');
-      }else if($data[1] == 2) {
-        header('Location: teacher');
-      }else {
-        // nieobsluzony przypadek (jeszcze nwm czy zostawie)
-      }
-    }
-  }
+  require_once("./autologin.php")
 ?>
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
