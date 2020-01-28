@@ -78,6 +78,7 @@
             <?php
           }
         }else {
+          // sprawdzanie czy uzytkownik juz istnieje
           $query = $connect->prepare("SELECT email FROM uzytkownicy WHERE id_statusu = 1 OR id_statusu = 2");
           $query->execute();
           $result = $query->get_result();
@@ -108,7 +109,10 @@
             <?php
           }else {
             $query = $connect->prepare("INSERT INTO uzytkownicy (email,haslo,id_rolu,id_statusu) VALUES (?,?,?,1)");
-            $query->bind_param('ssd',$_POST['email'],$_POST['password'],$_POST['role']);
+            $password = $_POST['password'];
+            $password = password_hash($password, PASSWORD_ARGON2ID);
+
+            $query->bind_param('ssd',$_POST['email'],$password,$_POST['role']);
             $query->execute();
 
             // zalogowanie
