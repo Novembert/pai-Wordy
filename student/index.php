@@ -14,6 +14,9 @@
           // nieobsluzony przypadek (jeszcze nwm czy zostawie)
         }
       }
+      if(!$data[3]){
+        header('Location: ./add_profile.php');
+      }
     }else if($data[2] == 2){
       // wywołaj jak konto nieaktywne
     }else if($data[2] == 3){

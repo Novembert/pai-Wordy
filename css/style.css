@@ -86,7 +86,7 @@ h3 {
   width: 100%;
 }
 
-#central_section input {
+#central_section input, #central_section textarea,select.class_input {
   position: relative;
   padding: 5px 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -100,7 +100,7 @@ h3 {
   background-color: #fff;
 }
 
-.box input,.box select, select.role_input {
+.box input,.box select, select.role_input  {
   position: relative;
   padding: 5px 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -215,6 +215,22 @@ div#name_div::before {
 
 div#class_div::before {
   content: 'Wybór klas';
+}
+
+div#id_klasy_div::before {
+  content: 'Wybór klasy';
+}
+
+div#imie_div::before {
+  content: 'Imię';
+}
+
+div#nazwisko_div::before {
+  content: 'Nazwisko';
+}
+
+div#opis_div::before {
+  content: 'Opis';
 }
 
 #central_section input[type='submit'] {
