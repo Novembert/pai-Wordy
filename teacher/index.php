@@ -1,27 +1,38 @@
 <?php
-  session_start();
-  if(!isset($_SESSION['user'])){
-    header('Location: ../login.php');
-  }else {
-    $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
-    $data = explode('!//#',$data);
-
-    if($data[2] == 1){
-      if($data[1] != 2) {
-        if($data[1] == 1) {
-          header('Location: ../student');
-        }else {
-          // nieobsluzony przypadek (jeszcze nwm czy zostawie)
-        }
-      }
-    }else if($data[2] == 2){
-      // wywołaj jak konto nieaktywne
-    }else if($data[2] == 3){
-      // wywolaj jak konto usuniete
+    $connect = mysqli_connect("localhost", "root", "", "wiai2");
+    mysqli_set_charset($connect, "utf8");
+  
+    session_start();
+    if(!isset($_SESSION['user'])){
+      header('Location: ../login.php');
     }else {
-      // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+      
+      require('../scripts/reload_user.php');
+  
+      $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
+      $data = explode('!//#',$data);
+
+      require('../scripts/load_profile.php');
+  
+      if($data[2] == 1){
+        if($data[1] != 2) {
+          if($data[1] == 1) {
+            header('Location: ../student');
+          }else {
+            // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+          }
+        }
+        if(!$data[3]){
+          header('Location: ./add_profile.php');
+        }
+      }else if($data[2] == 2){
+        // wywołaj jak konto nieaktywne
+      }else if($data[2] == 3){
+        // wywolaj jak konto usuniete
+      }else {
+        // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+      }
     }
-  }
 ?>
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">

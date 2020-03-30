@@ -1,3 +1,5 @@
+<?php require('./../scripts/load_profile.php'); ?>
+
 <div id="browse-flashcards" class="box">
   <h2>Twoje zestawy</h2>
   <section class="active">
@@ -6,10 +8,17 @@
       <div class="input_container" id="lang_div">
         <select class="" name="lang_select" id="lang_input">
           <option value=""></option>
-          <option value="ENG">ENG</option>
-          <option value="ESP">ESP</option>
-          <option value="DEU">DEU</option>
-          <option value="POR">POR</option>
+          <?php
+
+            $getAllLanguagesQuery = $connect->prepare("SELECT * FROM jezyki");
+            $getAllLanguagesQuery->execute();
+            $getAllLanguagesResult = $getAllLanguagesQuery->get_result();
+            // var_dump($getAllLanguagesResult);
+            while($lang = mysqli_fetch_assoc($getAllLanguagesResult)){
+              echo "<option value='$lang[id_jezyka]'>".$lang['nazwa_jezyka']."</option>";
+            }
+
+          ?>
         </select>
       </div>
       <div class="input_container" id="title2_div">
@@ -25,7 +34,46 @@
         <th class="sorted language">Język<i class="fas fa-chevron-down"/></th>
         <th>Tytuł</th>
       </tr>
-      <tr>
+      <?php 
+        if(isset($_GET['lang'])&&isset($_GET['title'])){
+          $getSelectedFlashcardSetsOfThisUserQuery = $connect->prepare("
+            SELECT * FROM `zestawy_fiszek`
+            INNER JOIN `klasy-zestawy` ON `klasy-zestawy`.id_zestawu=`zestawy_fiszek`.id_zestawu_fiszek
+            INNER JOIN `jezyki` ON `jezyki`.id_jezyka=`zestawy_fiszek`.id_jezyka
+            WHERE `klasy-zestawy`.id_klasy = ? AND `zestawy_fiszek`.id_jezyka = ? AND `zestawy_fiszek`.nazwa_zestawu LIKE ?
+          ");
+          $y = "%".$_GET['title']."%";
+          $getSelectedFlashcardSetsOfThisUserQuery->bind_param(
+            'iis',
+            $profile['id_klasy'],
+            $_GET['lang'],
+            $y
+          );
+          $getSelectedFlashcardSetsOfThisUserQuery->execute();
+          $getSelectedFlashcardSetsOfThisUserResult = $getSelectedFlashcardSetsOfThisUserQuery->get_result();
+          $flashcardsResult = $getSelectedFlashcardSetsOfThisUserResult;
+        }else {
+          $getAllFlashcardSetsOfThisUserQuery = $connect->prepare("
+            SELECT * FROM `zestawy_fiszek`
+            INNER JOIN `klasy-zestawy` ON `klasy-zestawy`.id_zestawu=`zestawy_fiszek`.id_zestawu_fiszek
+            INNER JOIN `jezyki` ON `jezyki`.id_jezyka=`zestawy_fiszek`.id_jezyka
+            WHERE `klasy-zestawy`.id_klasy = ?
+          ");
+          $getAllFlashcardSetsOfThisUserQuery->bind_param('i',$profile['id_klasy']);
+          $getAllFlashcardSetsOfThisUserQuery->execute();
+          $getAllFlashcardSetsOfThisUserResult = $getAllFlashcardSetsOfThisUserQuery->get_result();
+          $flashcardsResult = $getAllFlashcardSetsOfThisUserResult;
+        }
+        while($flashcardSet = mysqli_fetch_assoc($flashcardsResult)){
+          ?>
+            <tr>
+              <td class="language"><?php echo strtoupper(substr($flashcardSet['nazwa_jezyka'],0,3)) ?></td>
+              <td><a href="/Wordy/flashcards/set.php?set_id=<?php echo $flashcardSet['id_zestawu_fiszek']?>"><?php echo $flashcardSet['nazwa_zestawu']; ?></a></td>
+            </tr>
+          <?php
+        }
+      ?>
+      <!-- <tr>
         <td class="language">ESP</td>
         <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
       </tr>
@@ -72,7 +120,7 @@
       <tr>
         <td class="language">ESP</td>
         <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
+      </tr> -->
     </table>
   </section>
   <div id="excol-arrow-1" class="excol-arrow active">
@@ -137,6 +185,7 @@
 
     // dodanie nowego filtru
     btnFilter.addEventListener('click',(e)=>{
+
       let selectedLang = document.querySelector('#lang_input');
       let title2 = document.querySelector('#title2_input');
       e.preventDefault();
@@ -152,6 +201,15 @@
       }
 
       sessionStorage.setItem('flashcards-filter',`${selectedLang}|${title2}`)
+
+      let url = new URL(window.location.href);
+      let query_string = url.search;
+      let search_params = new URLSearchParams(query_string);
+      search_params.set('lang',selectedLang)
+      search_params.set('title',title2)
+      url.search = search_params.toString();
+      let newurl = url.toString();
+      window.location.href = newurl
     })
 
     btnClear.addEventListener('click',(e)=>{
@@ -162,6 +220,14 @@
       selectedLang.value = null
       title2.value = null
       checkLabels();
+      let url = new URL(window.location.href);
+      let query_string = url.search;
+      let search_params = new URLSearchParams(query_string);
+      search_params.delete('lang')
+      search_params.delete('title')
+      url.search = search_params.toString();
+      let newurl = url.toString();
+      window.location.href = newurl
     })
 
     // koniec cookies itp

@@ -209,10 +209,6 @@ div#lang_div::before {
   content: 'Język';
 }
 
-div#name_div::before {
-  content: 'Nowa nazwa';
-}
-
 div#class_div::before {
   content: 'Wybór klas';
 }
@@ -230,6 +226,14 @@ div#nazwisko_div::before {
 }
 
 div#opis_div::before {
+  content: 'Opis';
+}
+
+div#lname_div::before {
+  content: 'Nazwisko';
+}
+
+div#profdesc_div::before {
   content: 'Opis';
 }
 
@@ -396,7 +400,7 @@ div#profile_picture span {
   text-align: center;
   line-height: 75px;
   border-radius: 50%;
-  color: #9a5151;
+  color: #2a8dff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
 

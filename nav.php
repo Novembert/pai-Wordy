@@ -8,9 +8,9 @@
 </div>
 <aside>
   <div id="profile_picture">
-    <span>N</span>
+    <span><i class="fas fa-user"></i></span>
   </div>
-  <p id="name">Norbert</p>
+  <p id="name"><?php echo $profile['imie'] ?></p>
   <nav>
     <ul>
       <!-- link sie bedzie zmienial zaleznie od tego czy jest uczen czy student jak dodam php -->

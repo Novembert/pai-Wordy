@@ -1,10 +1,18 @@
 <?php
+  $connect = mysqli_connect("localhost", "root", "", "wiai2");
+  mysqli_set_charset($connect, "utf8");
+
   session_start();
   if(!isset($_SESSION['user'])){
     header('Location: ../login.php');
   }else {
+
+    require('../scripts/reload_user.php');
+
     $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
     $data = explode('!//#',$data);
+
+    require('../scripts/load_profile.php');
 
     if($data[2] == 1){
       if($data[1] != 1) {

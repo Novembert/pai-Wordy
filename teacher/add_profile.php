@@ -1,44 +1,46 @@
 <?php
-  $connect = mysqli_connect("localhost", "root", "", "wiai2");
-  mysqli_set_charset($connect, "utf8");
-  session_start();
-  if(!isset($_SESSION['user'])){
-    header('Location: ../login.php');
-  }else {
-    require('../scripts/reload_user.php');
 
-    $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
-    $data = explode('!//#',$data);
+$connect = mysqli_connect("localhost", "root", "", "wiai2");
+mysqli_set_charset($connect, "utf8");
+session_start();
+if(!isset($_SESSION['user'])){
+  header('Location: ../login.php');
+}else {
+  require('../scripts/reload_user.php');
 
-    if($data[2] == 1){
-      if($data[1] != 1) {
-        if($data[1] == 2) {
-          header('Location: ../teacher');
-        }else {
-          // nieobsluzony przypadek (jeszcze nwm czy zostawie)
-        }
-        
-      }
-      if($data[3]){
-        header('Location: ./index.php');
+  $data = openssl_decrypt($_SESSION['user'],'rc4-hmac-md5','ptaki_lataja_kluczem');
+  $data = explode('!//#',$data);
+
+  if($data[2] == 1){
+    if($data[1] != 2) {
+      if($data[1] == 1) {
+        header('Location: ../student');
       }else {
-
+        // nieobsluzony przypadek (jeszcze nwm czy zostawie)
       }
-    }else if($data[2] == 2){
-      // wywołaj jak konto nieaktywne
-    }else if($data[2] == 3){
-      // wywolaj jak konto usuniete
-    }else {
-      // nieobsluzony przypadek (jeszcze nwm czy zostawie)
+      
     }
+    if($data[3]){
+      header('Location: ./index.php');
+    }else {
+
+    }
+  }else if($data[2] == 2){
+    // wywołaj jak konto nieaktywne
+  }else if($data[2] == 3){
+    // wywolaj jak konto usuniete
+  }else {
+    // nieobsluzony przypadek (jeszcze nwm czy zostawie)
   }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wordy | Dodawanie profilu ucznia</title>
+    <title>Wordy | Dodawanie profilu nauczyciela</title>
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext"
       rel="stylesheet"
@@ -99,13 +101,12 @@
           }
         } else {
           $add_profile_query = $connect->prepare("
-            INSERT INTO `profile` (imie, nazwisko, opis, id_klasy) VALUES (?,?,?,?)
+            INSERT INTO `profile` (imie, nazwisko, opis) VALUES (?,?,?)
           ");
-          $add_profile_query->bind_param('sssi',
+          $add_profile_query->bind_param('sss',
             $_POST['imie'],
             $_POST['nazwisko'],
             $_POST['opis'],
-            $_POST['id_klasy'],
           );
           $add_profile_query->execute();
           $add_profile_result = $add_profile_query->get_result();
@@ -115,6 +116,14 @@
           ");
           $add_profileid_to_user_query->bind_param('ii',intval($connect->insert_id),intval($data[0]));
           $data[3] = intval($connect->insert_id);
+
+          foreach ($_POST['id_klasy'] as $selectedOption){
+            echo $selectedOption."\n";
+            $classTeacherQuery = $connect->prepare("INSERT INTO `klasy-nauczyciele`(`id_nauczyciela`, `id_klasy`) VALUES (?,?)");
+            $classTeacherQuery->bind_param('ii',$profile['id_profilu'],$selectedOption);
+            $classTeacherQuery->execute();
+          }
+
           $add_profileid_to_user_query->execute();
 
           $data = implode('!//#',$data);
@@ -139,8 +148,9 @@
         <div id="opis_div" class="input_container">
           <textarea name="opis" id="opis_input"></textarea>
         </div>
-        <div id="id_klasy_div" class="input_container">
-        <select name="id_klasy" id="id_klasy_input" class="class_input">
+        <div id="class2_div" class="input_container">
+        Wybór klas
+        <select name="id_klasy[]" id="class2_input" multiple style="width:100%">
             <option></option>
             <?php 
               $classes_query = $connect->prepare("
