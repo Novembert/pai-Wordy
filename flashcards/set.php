@@ -51,6 +51,13 @@ if(!isset($_SESSION['user'])){
         $fetchFlashcardsQuery->execute();
         $fetchFlashcardsResult = $fetchFlashcardsQuery->get_result();
       }
+
+      if(isset($_GET['del_id'])){
+        $deleteFlashcardQuery = $connect->prepare("DELETE FROM `fiszki` WHERE id_fiszki = ?");
+        $deleteFlashcardQuery->bind_param('i',$_GET['del_id']);
+        $deleteFlashcardQuery->execute();
+        Header(`Location: .?set_id=$zestaw`);
+      }
     }else if($data[2] == 2){
       // wywołaj jak konto nieaktywne
       header('Location: ../login.php');
@@ -104,7 +111,7 @@ if(!isset($_SESSION['user'])){
               <div>
                 <p>
                   <span><?php echo $i ?></span>
-                  <?php if($data[1]==2) echo "<i class='fas fa-trash'></i>" ?>
+                  <?php if($data[1]==2) echo "<a href='?set_id=$zestaw&del_id=$flashcardsResult[id_fiszki]'><i class='fas fa-trash'></i></a>" ?>
                 </p>
                 <p>
                   <span><?php echo $flashcardsResult['oryginal']?></span> 

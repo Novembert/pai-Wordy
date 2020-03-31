@@ -31,7 +31,7 @@
     </form>
     <table>
       <tr>
-        <th class="sorted language">Język<i class="fas fa-chevron-down"/></th>
+        <th>Język</th>
         <th>Tytuł</th>
       </tr>
       <?php 
@@ -73,54 +73,6 @@
           <?php
         }
       ?>
-      <!-- <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr>
-      <tr>
-        <td class="language">ESP</td>
-        <td><a href="/Wordy/flashcards/set.php">Repetytorium - Unit 1</a></td>
-      </tr> -->
     </table>
   </section>
   <div id="excol-arrow-1" class="excol-arrow active">

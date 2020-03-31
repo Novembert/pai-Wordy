@@ -1,7 +1,7 @@
 <div id="add-flashcards-box" class="box">
   <h2>Dodawanie fiszek</h2>
   <section>
-    <form method="post" action="./flashcards/add-flashcards.php">
+    <form method="get" action="./flashcards/add-flashcards.php">
       <div id="title_div" class="input_container">
         <input type="text" name="title" id="title_input">
       </div>
@@ -39,12 +39,6 @@
       else {
         titleDiv.classList.remove('active')
       }
-    })
-
-    sessionStorage.setItem('flashcards_adding_title',titleInput.value)
-
-    titleInput.addEventListener('input',()=>{
-      sessionStorage.setItem('flashcards_adding_title',titleInput.value)
     })
 
 
