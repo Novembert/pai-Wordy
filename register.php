@@ -176,7 +176,6 @@
             <option value="2">Nauczyciel</option>
           </select>
         </div>
-
         <input type="submit" name="btn1" value="Prześlij" />
       </form>
       <p>Masz już konto? <a href="login.php">Zaloguj się!</a></p>

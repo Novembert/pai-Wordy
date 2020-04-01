@@ -14,6 +14,8 @@
       if($data[1] != 1) {
         if($data[1] == 2) {
           header('Location: ../teacher');
+        }else if($data[1] == 3){
+          header('Location: ../admin');
         }else {
           // nieobsluzony przypadek (jeszcze nwm czy zostawie)
         }
